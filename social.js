@@ -8,19 +8,36 @@ class SocialNetwork {
   }
 
   addUser(name) {
-    // Your code here
+    this.currentID++;
+
+    let newUser = {
+      name: name,
+      id: this.currentID,
+    };
+
+    this.users[newUser.id] = newUser;
+    this.follows[newUser.id] = new Set();
+
+    return newUser.id;
   }
 
   getUser(userID) {
-    // Your code here
+    if (userID in this.users) return this.users[userID];
+
+    return null;
   }
 
   follow(userID1, userID2) {
-    // Your code here
+    if (this.getUser(userID2)) {
+      this.follows[userID1].add(userID2);
+      return true;
+    }
+
+    return false;
   }
 
   getFollows(userID) {
-    // Your code here
+    return this.follows[userID]
   }
 
   getFollowers(userID) {
